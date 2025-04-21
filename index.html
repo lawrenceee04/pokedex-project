@@ -4,227 +4,68 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Pokedex</title>
-        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <link rel="stylesheet" href="./style.css" />
     </head>
-    <body class="bg-black text-white">
-        <nav class="flex flex-row justify-self-center justify-between w-lg lg:w-6xl mx-5 my-6">
-            Pokedex
-            <div class="flex flex-row gap-4">
-                <div>PokeAPI</div>
-                <div>GitHub</div>
+    <body>
+        <div class="w-full bg-white inline-flex flex-col justify-start items-center overflow-hidden">
+            <!-- Navbar -->
+            <div class="self-stretch h-17 inline-flex justify-between items-center">
+                <div class="text-center justify-center text-black text-2xl font-normal leading-tight pl-3">Pokedex</div>
+                <div class="flex justify-start items-start flex-wrap content-start">
+                    <div class="h-17 px-3 flex justify-center items-center hover:bg-yellow-400">
+                        <div class="justify-center text-stone-900 text-md font-normal">Pokemons</div>
+                    </div>
+                    <div class="h-17 px-3 flex justify-center items-center hover:bg-yellow-400">
+                        <div class="justify-center text-stone-900 text-md font-normal">Abilities</div>
+                    </div>
+                    <div class="h-17 px-3 flex justify-center items-center hover:bg-yellow-400">
+                        <div class="justify-center text-stone-900 text-md font-normal">Locations</div>
+                    </div>
+                </div>
             </div>
-        </nav>
 
-        <section
-            class="static bg-[url(/pokedex-bg.jpg)] bg-fixed bg-center bg-no-repeat bg-cover justify-items-center content-center items-center h-120">
-            <div class="border-1 text-start rounded-xl p-3 w-64 text-sm z-10">Search for a pokemon</div>
-        </section>
-
-        <section class="justify-self-center w-lg lg:w-6xl grid grid-cols-2 lg:grid-cols-3 gap-4 text-center m-15">
-            <!-- Pokemon -->
-            <div class="flex flex-col border rounded-xl w-full h-85 p-3">
-                <div class="-1 flex items-end text-start break-all">Pikachu</div>
-                <div class="basis-1/6 flex-grow -1 flex flex-row my-3">
-                    <div class="basis-1/2 border border-dashed"></div>
-                    <div class="basis-1/2 flex flex-col ml-2">
-                        <div class="text-start">Type</div>
-                        <div class="grow flex items-center justify-center">Electric</div>
-                        <div>
-                            <div class="flex flex-row text-start">
-                                <div class="flex-1 flex-col">
-                                    <div>Height</div>
-                                    <div>4</div>
-                                </div>
-                                <div class="flex-1 flex-col">
-                                    <div>Weight</div>
-                                    <div>4</div>
-                                </div>
-                            </div>
+            <!-- Search Section -->
+            <div class="self-stretch h-70 inline-flex flex-col justify-center items-center gap-2.5">
+                <div
+                    class="aspect-16/9 w-full h-full bg-[url(./bg_search_section.png)] bg-cover flex items-center justify-center">
+                    <label for="default-search" class="mb-2 text-sm font-medium sr-only text-white">Search</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                            <svg
+                                class="w-4 h-4 text-white"
+                                aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 20 20">
+                                <path
+                                    stroke="currentColor"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                            </svg>
                         </div>
-                    </div>
-                </div>
-                <div class="text-start px-2">Abilities</div>
-                <div class="flex-initial px-1">
-                    <div class="flex flex-col px-2 py-1">
-                        <div class="font-bold text-start">Static</div>
-                    </div>
-                </div>
-                <div class="flex-initial px-1">
-                    <div class="flex flex-col px-2 py-1">
-                        <div class="font-bold text-start">Lightning Rod</div>
+                        <input
+                            type="search"
+                            id="default-search"
+                            class="w-60 lg:w-100 h-8 pl-10 bg-gradient-to-l text-white from-yellow-600/95 to-orange-800/95 rounded-[100px] shadow-[4px_4px_4px_0px_rgba(0,0,0,0.25)] inline-flex justify-center items-center gap-2.5 overflow-hidden"
+                            placeholder="Search"
+                            required />
                     </div>
                 </div>
             </div>
 
-            <div class="flex flex-col border rounded-xl w-full h-85 p-3">
-                <div class="-1 flex items-end text-start break-all">Pikachu</div>
-                <div class="basis-1/6 flex-grow -1 flex flex-row my-3">
-                    <div class="basis-1/2 border border-dashed"></div>
-                    <div class="basis-1/2 flex flex-col ml-2">
-                        <div class="text-start">Type</div>
-                        <div class="grow flex items-center justify-center">Electric</div>
-                        <div>
-                            <div class="flex flex-row text-start">
-                                <div class="flex-1 flex-col">
-                                    <div>Height</div>
-                                    <div>4</div>
-                                </div>
-                                <div class="flex-1 flex-col">
-                                    <div>Weight</div>
-                                    <div>4</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="text-start px-2">Abilities</div>
-                <div class="flex-initial px-1">
-                    <div class="flex flex-col px-2 py-1">
-                        <div class="font-bold text-start">Static</div>
-                    </div>
-                </div>
-                <div class="flex-initial px-1">
-                    <div class="flex flex-col px-2 py-1">
-                        <div class="font-bold text-start">Lightning Rod</div>
-                    </div>
-                </div>
+            <!-- Pokemons -->
+            <div
+                class="self-stretch px-2.5 py-6 inline-flex justify-center items-start gap-2.5 flex-wrap content-start overflow-hidden"
+                id="pokemons"></div>
+            <div class="pagination-container flex justify-center items-center gap-2.5 py-4" id="pagination">
+                <button class="pagination-btnp-2 rounded-lg hover:bg-amber-400" id="prev-page">Previous</button>
+                <span class="bg-blue-300 p-2 rounded-lg" id="current-page">1</span>
+                <button class="pagination-btn p-2 rounded-lg hover:bg-amber-400" id="next-page">Next</button>
             </div>
+        </div>
 
-            <div class="flex flex-col border rounded-xl w-full h-85 p-3">
-                <div class="-1 flex items-end text-start break-all">Pikachu</div>
-                <div class="basis-1/6 flex-grow -1 flex flex-row my-3">
-                    <div class="basis-1/2 border border-dashed"></div>
-                    <div class="basis-1/2 flex flex-col ml-2">
-                        <div class="text-start">Type</div>
-                        <div class="grow flex items-center justify-center">Electric</div>
-                        <div>
-                            <div class="flex flex-row text-start">
-                                <div class="flex-1 flex-col">
-                                    <div>Height</div>
-                                    <div>4</div>
-                                </div>
-                                <div class="flex-1 flex-col">
-                                    <div>Weight</div>
-                                    <div>4</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="text-start px-2">Abilities</div>
-                <div class="flex-initial px-1">
-                    <div class="flex flex-col px-2 py-1">
-                        <div class="font-bold text-start">Static</div>
-                    </div>
-                </div>
-                <div class="flex-initial px-1">
-                    <div class="flex flex-col px-2 py-1">
-                        <div class="font-bold text-start">Lightning Rod</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="flex flex-col border rounded-xl w-full h-85 p-3">
-                <div class="-1 flex items-end text-start break-all">Pikachu</div>
-                <div class="basis-1/6 flex-grow -1 flex flex-row my-3">
-                    <div class="basis-1/2 border border-dashed"></div>
-                    <div class="basis-1/2 flex flex-col ml-2">
-                        <div class="text-start">Type</div>
-                        <div class="grow flex items-center justify-center">Electric</div>
-                        <div>
-                            <div class="flex flex-row text-start">
-                                <div class="flex-1 flex-col">
-                                    <div>Height</div>
-                                    <div>4</div>
-                                </div>
-                                <div class="flex-1 flex-col">
-                                    <div>Weight</div>
-                                    <div>4</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="text-start px-2">Abilities</div>
-                <div class="flex-initial px-1">
-                    <div class="flex flex-col px-2 py-1">
-                        <div class="font-bold text-start">Static</div>
-                    </div>
-                </div>
-                <div class="flex-initial px-1">
-                    <div class="flex flex-col px-2 py-1">
-                        <div class="font-bold text-start">Lightning Rod</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="flex flex-col border rounded-xl w-full h-85 p-3">
-                <div class="-1 flex items-end text-start break-all">Pikachu</div>
-                <div class="basis-1/6 flex-grow -1 flex flex-row my-3">
-                    <div class="basis-1/2 border border-dashed"></div>
-                    <div class="basis-1/2 flex flex-col ml-2">
-                        <div class="text-start">Type</div>
-                        <div class="grow flex items-center justify-center">Electric</div>
-                        <div>
-                            <div class="flex flex-row text-start">
-                                <div class="flex-1 flex-col">
-                                    <div>Height</div>
-                                    <div>4</div>
-                                </div>
-                                <div class="flex-1 flex-col">
-                                    <div>Weight</div>
-                                    <div>4</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="text-start px-2">Abilities</div>
-                <div class="flex-initial px-1">
-                    <div class="flex flex-col px-2 py-1">
-                        <div class="font-bold text-start">Static</div>
-                    </div>
-                </div>
-                <div class="flex-initial px-1">
-                    <div class="flex flex-col px-2 py-1">
-                        <div class="font-bold text-start">Lightning Rod</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="flex flex-col border rounded-xl w-full h-85 p-3">
-                <div class="-1 flex items-end text-start break-all">Pikachu</div>
-                <div class="basis-1/6 flex-grow -1 flex flex-row my-3">
-                    <div class="basis-1/2 border border-dashed"></div>
-                    <div class="basis-1/2 flex flex-col ml-2">
-                        <div class="text-start">Type</div>
-                        <div class="grow flex items-center justify-center">Electric</div>
-                        <div>
-                            <div class="flex flex-row text-start">
-                                <div class="flex-1 flex-col">
-                                    <div>Height</div>
-                                    <div>4</div>
-                                </div>
-                                <div class="flex-1 flex-col">
-                                    <div>Weight</div>
-                                    <div>4</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="text-start px-2">Abilities</div>
-                <div class="flex-initial px-1">
-                    <div class="flex flex-col px-2 py-1">
-                        <div class="font-bold text-start">Static</div>
-                    </div>
-                </div>
-                <div class="flex-initial px-1">
-                    <div class="flex flex-col px-2 py-1">
-                        <div class="font-bold text-start">Lightning Rod</div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <script type="module" src="./script.js"></script>
     </body>
 </html>

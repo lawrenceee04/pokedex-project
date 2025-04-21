@@ -1,0 +1,23 @@
+@import 'tailwindcss';
+
+@theme {
+    --color-normal: #a8a878; /* Normal / Colorless (TCG) */
+    --color-grass: #78c850; /* Grass (TCG: also Bug and sometimes Poison) */
+    --color-bug: #78c850; /* Bug shares color with Grass in TCG */
+    --color-poison: #a040a0; /* Poison */
+    --color-fire: #f08030; /* Fire */
+    --color-water: #6890f0; /* Water */
+    --color-electric: #f8d030; /* Electric / Lightning (TCG) */
+    --color-psychic: #a040a0; /* Psychic / Ghost / Fairy (TCG) */
+    --color-fighting: #c03028; /* Fighting / Ground / Rock (TCG) */
+    --color-ground: #c03028; /* Same as Fighting in TCG */
+    --color-rock: #c03028; /* Same as Fighting in TCG */
+    --color-flying: #a890f0; /* Flying (no standalone TCG type) */
+    --color-ice: #6890f0; /* Ice shares Water's color in TCG */
+    --color-dark: #705848; /* Dark / Darkness (TCG) */
+    --color-ghost: #a040a0; /* Ghost shares color with Psychic in TCG */
+    --color-dragon: #7038f8; /* Dragon (often Gold/Green in older TCG, but purple/blue in newer) */
+    --color-fairy: #ee99ac; /* Retired in TCG, once shared with Psychic */
+    --color-steel: #b7b7ce; /* Steel / Metal (TCG) */
+    --color-metal: #b7b7ce; /* Same as Steel (TCG name) */
+}
