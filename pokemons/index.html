@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Pokedex</title>
+        <link rel="stylesheet" href="/style.css" />
+        <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
+    </head>
+    <body>
+        <div class="w-full bg-white inline-flex flex-col justify-start items-center overflow-hidden">
+            <!-- Navbar -->
+            <div class="self-stretch h-17 flex justify-between items-center">
+                <a
+                    href="/index.html"
+                    class="text-center justify-center text-black text-2xl font-normal leading-tight pl-3"
+                    >Pokedex</a
+                >
+                <div class="flex justify-start items-start flex-wrap content-start">
+                    <a
+                        href="/pokemons/#pokemons"
+                        id="pokemons"
+                        class="h-17 px-3 flex justify-center items-center hover:bg-yellow-400 target:bg-yellow-400">
+                        <div class="justify-center text-stone-900 text-md font-normal">Pokemons</div>
+                    </a>
+                    <a
+                        href="/abilities/#abilities"
+                        id="abilities"
+                        class="h-17 px-3 flex justify-center items-center hover:bg-yellow-400 target:bg-yellow-400">
+                        <div class="justify-center text-stone-900 text-md font-normal">Abilities</div>
+                    </a>
+                    <a
+                        href="/locations/#locations"
+                        id="locations"
+                        class="h-17 px-3 flex justify-center items-center hover:bg-yellow-400 target:bg-yellow-400">
+                        <div class="justify-center text-stone-900 text-md font-normal">Locations</div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Search Section -->
+            <div class="self-stretch h-70 inline-flex flex-col justify-center items-center gap-2.5">
+                <div
+                    class="aspect-16/9 w-full h-full bg-[url(./bg_search_section.png)] bg-cover flex items-center justify-center">
+                    <label for="default-search" class="mb-2 text-sm font-medium sr-only text-white">Search</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                            <svg
+                                class="w-4 h-4 text-white"
+                                aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 20 20">
+                                <path
+                                    stroke="currentColor"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                            </svg>
+                        </div>
+                        <input
+                            type="search"
+                            id="default-search"
+                            class="w-60 lg:w-100 h-8 pl-10 bg-gradient-to-l text-white from-yellow-600/95 to-orange-800/95 rounded-[100px] shadow-[4px_4px_4px_0px_rgba(0,0,0,0.25)] inline-flex justify-center items-center gap-2.5 overflow-hidden"
+                            placeholder="Search"
+                            required />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pokemons -->
+            <div
+                class="self-stretch px-2.5 py-6 inline-flex justify-center items-start gap-2.5 flex-wrap content-start overflow-hidden"
+                id="pokemons-list"></div>
+            <div class="pagination-container flex justify-center items-center gap-2.5 py-4" id="pagination">
+                <button class="pagination-btnp-2 rounded-lg hover:bg-amber-400" id="prev-page">Previous</button>
+                <span class="bg-blue-300 p-2 rounded-lg" id="current-page">1</span>
+                <button class="pagination-btn p-2 rounded-lg hover:bg-amber-400" id="next-page">Next</button>
+            </div>
+        </div>
+
+        <script type="module" src="script.js"></script>
+    </body>
+</html>

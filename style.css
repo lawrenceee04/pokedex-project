@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Lalezar&display=swap');
+
 @import 'tailwindcss';
 
 @theme {
@@ -20,4 +22,5 @@
     --color-fairy: #ee99ac; /* Retired in TCG, once shared with Psychic */
     --color-steel: #b7b7ce; /* Steel / Metal (TCG) */
     --color-metal: #b7b7ce; /* Same as Steel (TCG name) */
+    --default-font-family: 'Lalezar', sans-serif;
 }

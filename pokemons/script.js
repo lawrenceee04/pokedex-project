@@ -48,7 +48,7 @@ async function getPokemons(page = 1) {
 }
 
 async function renderPokemon(page) {
-    const pokemons = document.getElementById('pokemons');
+    const pokemons = document.getElementById('pokemons-list');
     pokemons.innerHTML = '';
     (async () => {
         const result = await getPokemons(page);
@@ -142,15 +142,12 @@ async function renderPokemon(page) {
                 back_card.setAttributeNode(j);
 
                 // Pokemon Height
-                const heightInFeet = Math.floor(height * 0.328084); // Convert decimeters to feet
-                const heightInInches = Math.round((height * 0.328084 - heightInFeet) * 12); // Remaining inches
-                const height_foot = `${heightInFeet}`;
-                const height_inch = heightInInches < 10 ? `0${heightInInches}` : `${heightInInches}`;
+                const height_cm = (height * 10).toFixed(2);
 
                 // Pokemon Weight
-                const weight_kg = weight * 0.1;
+                const weight_kg = (weight * 0.1).toFixed(2);
 
-                back_card.innerHTML = `${height_foot[0]}' ${height_inch}" ${weight_kg} kg`;
+                back_card.innerHTML = `${height_cm} cm ${weight_kg} kg`;
 
                 pokemon_card.appendChild(back_card);
                 pokemons.appendChild(pokemon_card);

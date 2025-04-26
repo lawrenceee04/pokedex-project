@@ -1,0 +1,18 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+  [[redirects]]
+    from = "/pokemons/*"
+    to = "/pokemons/index.html#pokemons"
+    status = 200
+
+  [[redirects]]
+    from = "/abilities/*"
+    to = "/abilities/index.html#abilities"
+    status = 200
+
+  [[redirects]]
+    from = "/locations/*"
+    to = "/locations/index.html#locations"
+    status = 200
