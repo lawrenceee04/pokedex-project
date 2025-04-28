@@ -3,83 +3,147 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Pokedex</title>
+        <title>Pokemons</title>
         <link rel="stylesheet" href="/style.css" />
-        <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
+        <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
+        <link rel="stylesheet" href="../node_modules/spin.js/spin.css" />
+        <script type="module" src="script.js" defer></script>
     </head>
-    <body>
-        <div class="w-full bg-white inline-flex flex-col justify-start items-center overflow-hidden">
-            <!-- Navbar -->
-            <div class="self-stretch h-17 flex justify-between items-center">
-                <a
-                    href="/index.html"
-                    class="text-center justify-center text-black text-2xl font-normal leading-tight pl-3"
-                    >Pokedex</a
-                >
-                <div class="flex justify-start items-start flex-wrap content-start">
-                    <a
-                        href="/pokemons/#pokemons"
-                        id="pokemons"
-                        class="h-17 px-3 flex justify-center items-center hover:bg-yellow-400 target:bg-yellow-400">
-                        <div class="justify-center text-stone-900 text-md font-normal">Pokemons</div>
-                    </a>
-                    <a
-                        href="/abilities/#abilities"
-                        id="abilities"
-                        class="h-17 px-3 flex justify-center items-center hover:bg-yellow-400 target:bg-yellow-400">
-                        <div class="justify-center text-stone-900 text-md font-normal">Abilities</div>
-                    </a>
-                    <a
-                        href="/locations/#locations"
-                        id="locations"
-                        class="h-17 px-3 flex justify-center items-center hover:bg-yellow-400 target:bg-yellow-400">
-                        <div class="justify-center text-stone-900 text-md font-normal">Locations</div>
-                    </a>
+    <body class="font-default spinner">
+        <!-- Navbar -->
+        <nav>
+            <div class="max-w-screen-xl flex flex-wrap lg:flex-nowrap items-center justify-between mx-auto p-4">
+                <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
+                    <img src="/favicon.png" class="h-10" alt="Pokemon Logo" />
+                    <span class="self-center text-2xl whitespace-nowrap">Pokedex</span>
+                </a>
+
+                <button
+                    data-collapse-toggle="navbar-hamburger"
+                    type="button"
+                    class="justify-items-center text-center justify-center p-2 w-10 h-10 text-sm text-black rounded-lg hover:bg-amber-400 focus:outline-none focus:ring-2 focus:ring-gray-500 block lg:hidden"
+                    aria-controls="navbar-hamburger"
+                    aria-expanded="false">
+                    <span class="sr-only">Open main menu</span>
+                    <svg
+                        class="w-5 h-5"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 17 17">
+                        <path
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2.3"
+                            d="M1 1h15M1 7h15M1 13h15" />
+                    </svg>
+                </button>
+                <div class="hidden lg:inline-block w-full lg:w-auto" id="navbar-hamburger">
+                    <ul class="flex flex-col lg:flex-row font-medium mt-4 lg:mt-0 rounded-lg gap-2 lg:gap-4">
+                        <li>
+                            <a
+                                href="/pokemons/index.html"
+                                class="block py-2 px-3 rounded-sm bg-amber-400 text-white"
+                                aria-current="page"
+                                >Pokemons</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="/abilities/index.html"
+                                class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-amber-400 hover:text-white"
+                                >Abilities</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="/locations/index.html"
+                                class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-amber-400 hover:text-white"
+                                >Locations</a
+                            >
+                        </li>
+                    </ul>
                 </div>
             </div>
+        </nav>
 
-            <!-- Search Section -->
-            <div class="self-stretch h-70 inline-flex flex-col justify-center items-center gap-2.5">
-                <div
-                    class="aspect-16/9 w-full h-full bg-[url(/bg_search_section.png)] bg-cover flex items-center justify-center">
-                    <label for="default-search" class="mb-2 text-sm font-medium sr-only text-white">Search</label>
-                    <div class="relative">
-                        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                            <svg
-                                class="w-4 h-4 text-white"
-                                aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 20 20">
-                                <path
-                                    stroke="currentColor"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                            </svg>
-                        </div>
-                        <input
-                            type="search"
-                            id="default-search"
-                            class="w-60 lg:w-100 h-8 pl-10 bg-gradient-to-l text-white from-yellow-600/95 to-orange-800/95 rounded-[100px] shadow-[4px_4px_4px_0px_rgba(0,0,0,0.25)] inline-flex justify-center items-center gap-2.5 overflow-hidden"
-                            placeholder="Search"
-                            required />
+        <!-- Search Section -->
+        <div class="swiper w-full h-40 sm:h-70 flex-col justify-center items-center">
+            <div class="swiper-wrapper"></div>
+            <div class="aspect-16/9 w-full h-full bg-black flex items-center justify-center">
+                <label for="default-search" class="mb-2 text-sm font-medium sr-only text-white">Search</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                        <svg
+                            class="w-4 h-4 text-white"
+                            aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 20 20">
+                            <path
+                                stroke="currentColor"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                        </svg>
                     </div>
+                    <input
+                        type="search"
+                        id="default-search"
+                        class="w-80 sm:w-100 h-8 pl-10 bg-gradient-to-l text-white from-yellow-600/95 to-orange-800/95 rounded-[100px] shadow-[4px_4px_4px_0px_rgba(0,0,0,0.25)] inline-flex justify-center items-center gap-2.5 overflow-hidden"
+                        placeholder="Search"
+                        required />
                 </div>
-            </div>
-
-            <!-- Pokemons -->
-            <div
-                class="self-stretch px-2.5 py-6 inline-flex justify-center items-start gap-2.5 flex-wrap content-start overflow-hidden"
-                id="pokemons-list"></div>
-            <div class="pagination-container flex justify-center items-center gap-2.5 py-4" id="pagination">
-                <button class="pagination-btnp-2 rounded-lg hover:bg-amber-400" id="prev-page">Previous</button>
-                <span class="bg-blue-300 p-2 rounded-lg" id="current-page">1</span>
-                <button class="pagination-btn p-2 rounded-lg hover:bg-amber-400" id="next-page">Next</button>
             </div>
         </div>
 
-        <script type="module" src="script.js"></script>
+        <!-- Pokemons -->
+        <div
+            class="self-stretch px-2.5 py-6 inline-flex justify-center items-start gap-2.5 flex-wrap content-start overflow-hidden"
+            id="pokemons-list"></div>
+        <div
+            class="pagination-container sticky bottom-0 flex place-content-center gap-3 py-4 bg-black text-white"
+            id="pagination">
+            <button class="pagination-btn p-2 rounded-lg hover:bg-amber-400" id="prev-page">Prev</button>
+            <span class="bg-red-500 p-2 rounded-lg" id="current-page">1</span>
+            <button class="pagination-btn p-2 rounded-lg hover:bg-amber-400" id="next-page">Next</button>
+        </div>
+
+        <footer class="self-stretch px-4 py-5 flex flex-col justify-between items-center gap-6 text-white bg-black">
+            <div class="self-stretch flex flex-col justify-center items-start gap-1.5">
+                <div class="justify-center text-base md:text-lg lg:text-xl leading-none">Credits</div>
+                <div class="justify-center text-xs md:text-base lg:text-lg">
+                    Data provided by
+                    <a
+                        href="https://pokeapi.co/docs/v2"
+                        class="underline hover:no-underline hover:text-red-500"
+                        title="PokeAPI"
+                        target="_blank"
+                        >PokeAPI</a
+                    >. Thank you for making this project possible!
+                </div>
+                <div class="justify-center text-xs md:text-base lg:text-lg">
+                    Pokemon icons created by
+                    <a
+                        class="underline hover:no-underline hover:text-red-500"
+                        href="https://www.flaticon.com/free-icons/pokemon"
+                        title="Nikita Golubev - Flaticon">
+                        Nikita Golubev - Flaticon</a
+                    >
+                </div>
+            </div>
+            <div class="justify-center text-base md:text-lg lg:text-xl leading-3">
+                Pokedex-Lawrence | Designed by
+                <a
+                    href="http://lawrenceee04.is-a.dev"
+                    target="_blank"
+                    class="underline hover:no-underline hover:text-red-500"
+                    title="Lawrence Garcia"
+                    >Lawrence Garcia</a
+                >
+            </div>
+        </footer>
     </body>
 </html>

@@ -1,5 +1,7 @@
-const pokeAPI = 'https://pokeapi.co/api/v2/';
-const pokemon = `${pokeAPI}pokemon/`;
+import 'flowbite';
+
+import { fetchAPI } from '../pokeapi.mjs';
+
 const limit = 20;
 let currentPage = 1;
 
@@ -38,10 +40,8 @@ async function getPokemonByUrl(url) {
 async function getPokemons(page = 1) {
     const offset = (page - 1) * limit;
     try {
-        const response = await fetch(`${pokemon}?offset=${offset}&limit=${limit}`);
-        const json0 = await response.json();
-        const json = json0.results;
-        return json;
+        const response = await fetchAPI('pokemon', offset, limit);
+        return response.results;
     } catch (error) {
         return 1;
     }

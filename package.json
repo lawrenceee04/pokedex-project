@@ -1,6 +1,7 @@
 {
     "name": "pokedex",
     "version": "1.0.0",
+    "type": "module",
     "main": "index.js",
     "scripts": {
         "dev": "run-p vite dev-css",
@@ -22,7 +23,9 @@
         "vite": "^6.3.2"
     },
     "dependencies": {
-        "@tensorflow/tfjs-node": "^4.22.0",
-        "upscaler": "^1.0.0-beta.19"
+        "algoliasearch": "^5.23.4",
+        "flowbite": "^3.1.2",
+        "spin.js": "^4.1.2",
+        "swiper": "^11.2.6"
     }
 }
