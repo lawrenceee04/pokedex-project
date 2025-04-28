@@ -23,7 +23,7 @@
         "vite": "^6.3.2"
     },
     "dependencies": {
-        "algoliasearch": "^5.23.4",
+        "@cacheable/node-cache": "^1.5.4",
         "flowbite": "^3.1.2",
         "spin.js": "^4.1.2",
         "swiper": "^11.2.6"

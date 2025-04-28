@@ -1,7 +1,8 @@
 import 'flowbite';
-
+import NodeCache from '@cacheable/node-cache';
 import { fetchAPI } from '../pokeapi.mjs';
 
+const cache = new NodeCache();
 const limit = 20;
 let currentPage = 1;
 
@@ -39,11 +40,20 @@ async function getPokemonByUrl(url) {
 
 async function getPokemons(page = 1) {
     const offset = (page - 1) * limit;
-    try {
-        const response = await fetchAPI('pokemon', offset, limit);
-        return response.results;
-    } catch (error) {
-        return 1;
+
+    // Set cache key to page/${pageNumber}
+    const key = `page/${page}`;
+    if (cache.get(key)) {
+        return cache.get(key);
+    } else {
+        try {
+            const response = await fetchAPI('pokemon', offset, limit);
+            const results = response.results;
+            cache.set(key, results, 0);
+            return results;
+        } catch (error) {
+            return 1;
+        }
     }
 }
 
@@ -55,6 +65,7 @@ async function renderPokemon(page) {
         if (result === 1) {
             console.log('error');
         } else {
+            // Make sure all pokemon details are pulled before DOM manipulation
             const pokemonDetails = await Promise.all(
                 result.map(async (element) => {
                     const pokemon = await getPokemonByUrl(element.url);
@@ -68,7 +79,7 @@ async function renderPokemon(page) {
                     return { id, name, spriteUrl, types, weight, height };
                 })
             );
-            pokemonDetails.forEach(({ id, name, spriteUrl, types, weight, height }) => {
+            pokemonDetails.forEach((pokemon) => {
                 // Pokemon Card
                 const pokemon_card = document.createElement('div');
                 const a = document.createAttribute('class');
@@ -76,7 +87,7 @@ async function renderPokemon(page) {
                     'w-36 lg:w-72 h-48 lg:h-72 p-5 rounded-2xl outline inline-flex flex-col justify-center items-center hover:rotate-y-180 transform-3d transition-transform duration-350';
                 pokemon_card.setAttributeNode(a);
                 const b = document.createAttribute('id');
-                b.value = `pokemon-${id}`;
+                b.value = `pokemon-${pokemon.id}`;
                 pokemon_card.setAttributeNode(b);
 
                 // Front Card
@@ -91,9 +102,9 @@ async function renderPokemon(page) {
                 c.value = 'flex-auto w-full';
                 pokemon_sprite.setAttributeNode(c);
                 const d = document.createAttribute('id');
-                d.value = `pokemon-${id}-sprite`;
+                d.value = `pokemon-${pokemon.id}-sprite`;
                 pokemon_sprite.setAttributeNode(c);
-                pokemon_sprite.src = `${spriteUrl}`;
+                pokemon_sprite.src = `${pokemon.spriteUrl}`;
 
                 // Pokemon Name
                 const pokemon_name = document.createElement('div');
@@ -101,9 +112,9 @@ async function renderPokemon(page) {
                 e.value = 'text-center justify-center text-black text-2xl lg:text-3xl font-light';
                 pokemon_name.setAttributeNode(e);
                 const f = document.createAttribute('id');
-                f.value = `pokemon-${id}-name`;
+                f.value = `pokemon-${pokemon.id}-name`;
                 pokemon_name.setAttributeNode(f);
-                pokemon_name.innerHTML = `${name}`;
+                pokemon_name.innerHTML = `${pokemon.name}`;
 
                 // Pokemon Types Container
                 const pokemon_types = document.createElement('div');
@@ -111,18 +122,18 @@ async function renderPokemon(page) {
                 g.value = 'w-full lg:px-10 inline-flex justify-center items-center gap-[3px] flex-wrap content-center';
                 pokemon_types.setAttributeNode(g);
                 const h = document.createAttribute('id');
-                h.value = `pokemon-${id}-types`;
+                h.value = `pokemon-${pokemon.id}-types`;
                 pokemon_types.setAttributeNode(h);
 
                 // Pokemon Type
-                types.forEach((typeObj, index) => {
+                pokemon.types.forEach((typeObj, index) => {
                     const pokemon_type = document.createElement('div');
                     const a = document.createAttribute('class');
                     a.value = `px-1 py-0 rounded-lg flex justify-between items-center text-black text-xs lg:text-sm font-semibold`;
                     pokemon_type.style.backgroundColor = typeColors[typeObj.type.name];
                     pokemon_type.setAttributeNode(a);
                     const b = document.createAttribute('id');
-                    b.value = `pokemon-${id}-type-${index}`;
+                    b.value = `pokemon-${pokemon.id}-type-${index}`;
                     pokemon_type.setAttributeNode(b);
                     pokemon_type.innerHTML = typeObj.type.name;
 
@@ -142,10 +153,10 @@ async function renderPokemon(page) {
                 back_card.setAttributeNode(j);
 
                 // Pokemon Height
-                const height_cm = (height * 10).toFixed(2);
+                const height_cm = (pokemon.height * 10).toFixed(2);
 
                 // Pokemon Weight
-                const weight_kg = (weight * 0.1).toFixed(2);
+                const weight_kg = (pokemon.weight * 0.1).toFixed(2);
 
                 back_card.innerHTML = `${height_cm} cm ${weight_kg} kg`;
 

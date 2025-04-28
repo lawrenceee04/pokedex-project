@@ -46,3 +46,22 @@ export async function fetchAPI(endpoint, offset = 0, limit = 0) {
         return 1;
     }
 }
+
+export async function fetchSearchAPI(endpoint, id) {
+    var target = document.querySelector('.spinner');
+    var spinner = new Spinner(opts).spin(target);
+    target.classList.add('bg-black/80', 'z-999');
+
+    try {
+        const response = await fetch(`${url}${endpoint}/${id}`);
+        const results = await response.json();
+
+        return results;
+    } catch (error) {
+        console.error('Error fetching search API:', error);
+        return null;
+    } finally {
+        spinner.stop();
+        target.classList.remove('bg-black/80', 'z-999');
+    }
+}
