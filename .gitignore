@@ -1,6 +1,7 @@
 /dist
 /node_modules
-/public
+.env
+algolia.js
 
 # Local Netlify folder
 .netlify
