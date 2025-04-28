@@ -1,6 +1,7 @@
 import { Spinner } from 'spin.js';
 const url = 'https://pokeapi.co/api/v2/';
 
+// Spinner brought to you by https://spin.js.org/
 var opts = {
     lines: 13, // The number of lines to draw
     length: 11, // The length of each line
@@ -25,7 +26,7 @@ var opts = {
 export async function fetchAPI(endpoint, offset = 0, limit = 0) {
     var target = document.querySelector('.spinner');
     var spinner = new Spinner(opts).spin(target);
-    target.classList.add('bg-black/70', 'z-50');
+    target.classList.add('bg-black/80', 'z-999');
 
     try {
         let response = undefined;
@@ -38,7 +39,7 @@ export async function fetchAPI(endpoint, offset = 0, limit = 0) {
         const results = response.json();
 
         spinner.stop();
-        target.classList.remove('bg-black/70', 'z-50');
+        target.classList.remove('bg-black/80', 'z-999');
 
         return results;
     } catch (error) {
