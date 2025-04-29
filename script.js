@@ -2,7 +2,7 @@ import Swiper from 'swiper/bundle';
 import 'swiper/css/bundle';
 import 'flowbite';
 
-import { fetchAPI } from './pokeapi.mjs';
+import { fetchAPI } from './pokeapi.js';
 
 function swiperNoSwipingHAHAHA() {
     const swiper = new Swiper('.swiper', {

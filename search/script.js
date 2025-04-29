@@ -1,5 +1,5 @@
 import 'flowbite';
-import { fetchAPI, fetchSearchAPI } from '../pokeapi.mjs';
+import { fetchAPI, fetchSearchAPI } from '../pokeapi.js';
 
 const searchTerm = window.location.search.split('=')[1];
 const searchResults = document.getElementById('search-results');

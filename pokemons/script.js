@@ -1,6 +1,6 @@
 import 'flowbite';
 import NodeCache from '@cacheable/node-cache';
-import { fetchAPI } from '../pokeapi.mjs';
+import { fetchAPI } from '../pokeapi.js';
 
 const cache = new NodeCache();
 const limit = 20;
