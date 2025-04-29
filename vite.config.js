@@ -12,7 +12,6 @@ export default defineConfig({
                 pokemons: resolve(__dirname, 'pokemons/index.html'),
                 abilities: resolve(__dirname, 'abilities/index.html'),
                 locations: resolve(__dirname, 'locations/index.html'),
-                search: resolve(__dirname, 'search/index.html'),
             },
         },
     },
