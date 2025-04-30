@@ -75,16 +75,30 @@ async function renderPokemon(page) {
                     const name = element.name;
                     const weight = pokemon.weight;
                     const height = pokemon.height;
+                    const hp = pokemon.stats[0].base_stat;
 
-                    return { id, name, spriteUrl, types, weight, height };
+                    return { id, name, spriteUrl, types, weight, height, hp };
                 })
             );
             pokemonDetails.forEach((pokemon) => {
                 // Pokemon Card
-                const pokemon_card = document.createElement('div');
+                const pokemon_card = document.createElement('a');
                 const a = document.createAttribute('class');
-                a.value =
-                    'w-36 lg:w-72 h-48 lg:h-72 p-5 rounded-2xl outline inline-flex flex-col justify-center items-center hover:rotate-y-180 transform-3d transition-transform duration-350';
+                const pokemon_link = document.createAttribute('href');
+                pokemon_link.value = `/pokemon/${pokemon.name}`;
+                pokemon_card.setAttributeNode(pokemon_link);
+                a.value = `w-36 lg:w-72 h-48 lg:h-72 p-5 rounded-2xl inline-flex flex-col justify-center items-center hover:rotate-y-180 transform-3d transition-transform duration-350 border border-2 hover:border-7 border-black`;
+
+                // Add hover effect dynamically
+                pokemon_card.addEventListener('mouseover', () => {
+                    pokemon_card.style.borderColor = `var(--color-${pokemon.types[0].type.name})`;
+                    pokemon_card.style.backgroundColor = `var(--color-${pokemon.types[0].type.name})`;
+                });
+                pokemon_card.addEventListener('mouseout', () => {
+                    pokemon_card.style.borderColor = 'black';
+                    pokemon_card.style.backgroundColor = `white`;
+                });
+
                 pokemon_card.setAttributeNode(a);
                 const b = document.createAttribute('id');
                 b.value = `pokemon-${pokemon.id}`;
@@ -149,16 +163,53 @@ async function renderPokemon(page) {
                 const back_card = document.createElement('div');
                 const j = document.createAttribute('class');
                 j.value =
-                    'backface-hidden flex flex-col justify-center items-center rotate-y-180 absolute top-0 bottom-0 right-0 left-0 p-5';
+                    'backface-hidden flex flex-col justify-center rotate-y-180 absolute top-0 bottom-0 right-0 left-0 p-5';
                 back_card.setAttributeNode(j);
 
-                // Pokemon Height
-                const height_cm = (pokemon.height * 0.1).toFixed(2);
+                // Create a container for the details
+                const detailsContainer = document.createElement('div');
 
                 // Pokemon Weight
                 const weight_kg = (pokemon.weight * 0.1).toFixed(2);
 
-                back_card.innerHTML = `${height_cm} m ${weight_kg} kg`;
+                // Pokemon Height
+                const height_cm = (pokemon.height * 0.1).toFixed(2);
+
+                // Weight
+                const weightTitle = document.createElement('div');
+                weightTitle.className = 'text-black text-xl';
+                weightTitle.innerText = 'Weight';
+                detailsContainer.appendChild(weightTitle);
+
+                const weightValue = document.createElement('div');
+                weightValue.className = 'text-center text-black text-md';
+                weightValue.innerText = `${weight_kg} kg`;
+                detailsContainer.appendChild(weightValue);
+
+                // Height
+                const heightTitle = document.createElement('div');
+                heightTitle.className = 'text-black text-xl';
+                heightTitle.innerText = 'Height';
+                detailsContainer.appendChild(heightTitle);
+
+                const heightValue = document.createElement('div');
+                heightValue.className = 'text-center text-black text-md';
+                heightValue.innerText = `${height_cm} cm`;
+                detailsContainer.appendChild(heightValue);
+
+                // HP
+                const hpTitle = document.createElement('div');
+                hpTitle.className = 'text-black text-xl';
+                hpTitle.innerText = 'HP';
+                detailsContainer.appendChild(hpTitle);
+
+                const hpValue = document.createElement('div');
+                hpValue.className = 'text-center text-black text-md';
+                hpValue.innerText = `${pokemon.hp}`;
+                detailsContainer.appendChild(hpValue);
+
+                // Append the details container to the desired parent element
+                back_card.appendChild(detailsContainer);
 
                 pokemon_card.appendChild(back_card);
                 pokemons.appendChild(pokemon_card);
