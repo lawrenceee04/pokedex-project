@@ -153,12 +153,12 @@ async function renderPokemon(page) {
                 back_card.setAttributeNode(j);
 
                 // Pokemon Height
-                const height_cm = (pokemon.height * 10).toFixed(2);
+                const height_cm = (pokemon.height * 0.1).toFixed(2);
 
                 // Pokemon Weight
                 const weight_kg = (pokemon.weight * 0.1).toFixed(2);
 
-                back_card.innerHTML = `${height_cm} cm ${weight_kg} kg`;
+                back_card.innerHTML = `${height_cm} m ${weight_kg} kg`;
 
                 pokemon_card.appendChild(back_card);
                 pokemons.appendChild(pokemon_card);
