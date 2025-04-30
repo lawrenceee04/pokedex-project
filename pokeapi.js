@@ -20,13 +20,13 @@ var opts = {
     shadow: '0 0 5px black', // Box-shadow for the lines
     zIndex: 2000000000, // The z-index (defaults to 2e9)
     className: 'spinner', // The CSS class to assign to the spinner
-    position: 'absolute', // Element positioning
+    position: 'fixed', // Element positioning
 };
 
 export async function fetchAPI(endpoint, offset = 0, limit = 0) {
     var target = document.querySelector('.spinner');
     var spinner = new Spinner(opts).spin(target);
-    target.classList.add('bg-black/80', 'z-999');
+    target.classList.add('bg-black/80', 'z-999', 'fixed', 'pointer-events-none');
 
     try {
         let response = undefined;
@@ -39,7 +39,7 @@ export async function fetchAPI(endpoint, offset = 0, limit = 0) {
         const results = response.json();
 
         spinner.stop();
-        target.classList.remove('bg-black/80', 'z-999');
+        target.classList.remove('bg-black/80', 'z-999', 'fixed', 'pointer-events-none');
 
         return results;
     } catch (error) {

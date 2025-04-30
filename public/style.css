@@ -220,6 +220,9 @@
   }
 }
 @layer utilities {
+  .pointer-events-none {
+    pointer-events: none;
+  }
   .sr-only {
     position: absolute;
     width: 1px;
@@ -233,6 +236,9 @@
   }
   .absolute {
     position: absolute;
+  }
+  .fixed {
+    position: fixed;
   }
   .relative {
     position: relative;
@@ -266,6 +272,12 @@
   }
   .left-0\.5 {
     left: calc(var(--spacing) * 0.5);
+  }
+  .z-0 {
+    z-index: 0;
+  }
+  .z-8 {
+    z-index: 8;
   }
   .z-10 {
     z-index: 10;
@@ -343,6 +355,9 @@
   .h-auto {
     height: auto;
   }
+  .h-dvh {
+    height: 100dvh;
+  }
   .h-full {
     height: 100%;
   }
@@ -404,14 +419,8 @@
   .justify-center {
     justify-content: center;
   }
-  .justify-start {
-    justify-content: flex-start;
-  }
   .justify-items-center {
     justify-items: center;
-  }
-  .gap-1 {
-    gap: calc(var(--spacing) * 1);
   }
   .gap-1\.5 {
     gap: calc(var(--spacing) * 1.5);
@@ -473,9 +482,6 @@
   .border-black {
     border-color: var(--color-black);
   }
-  .border-blue-400 {
-    border-color: var(--color-blue-400);
-  }
   .border-gray-200 {
     border-color: var(--color-gray-200);
   }
@@ -515,9 +521,6 @@
   .px-1 {
     padding-inline: calc(var(--spacing) * 1);
   }
-  .px-2 {
-    padding-inline: calc(var(--spacing) * 2);
-  }
   .px-2\.5 {
     padding-inline: calc(var(--spacing) * 2.5);
   }
@@ -539,9 +542,6 @@
   .py-2 {
     padding-block: calc(var(--spacing) * 2);
   }
-  .py-3 {
-    padding-block: calc(var(--spacing) * 3);
-  }
   .py-4 {
     padding-block: calc(var(--spacing) * 4);
   }
@@ -556,9 +556,6 @@
   }
   .text-end {
     text-align: end;
-  }
-  .font-\[\'League_Spartan\'\] {
-    font-family: 'League Spartan';
   }
   .font-roboto {
     font-family: var(--font-roboto);
@@ -578,10 +575,6 @@
   .text-base {
     font-size: var(--text-base);
     line-height: var(--tw-leading, var(--text-base--line-height));
-  }
-  .text-lg {
-    font-size: var(--text-lg);
-    line-height: var(--tw-leading, var(--text-lg--line-height));
   }
   .text-sm {
     font-size: var(--text-sm);
@@ -654,20 +647,6 @@
     --tw-shadow: 0 4px 6px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 2px 4px -2px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
   }
-  .outline {
-    outline-style: var(--tw-outline-style);
-    outline-width: 1px;
-  }
-  .outline-1 {
-    outline-style: var(--tw-outline-style);
-    outline-width: 1px;
-  }
-  .outline-offset-\[-1px\] {
-    outline-offset: -1px;
-  }
-  .outline-black {
-    outline-color: var(--color-black);
-  }
   .brightness-60 {
     --tw-brightness: brightness(60%);
     filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
@@ -687,21 +666,6 @@
   .transform-3d {
     transform-style: preserve-3d;
   }
-  .hover\:hidden {
-    &:hover {
-      @media (hover: hover) {
-        display: none;
-      }
-    }
-  }
-  .hover\:rotate-y-90 {
-    &:hover {
-      @media (hover: hover) {
-        --tw-rotate-y: rotateY(90deg);
-        transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
-      }
-    }
-  }
   .hover\:rotate-y-180 {
     &:hover {
       @media (hover: hover) {
@@ -710,42 +674,11 @@
       }
     }
   }
-  .hover\:rotate-y-360 {
-    &:hover {
-      @media (hover: hover) {
-        --tw-rotate-y: rotateY(360deg);
-        transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
-      }
-    }
-  }
-  .hover\:border-4 {
-    &:hover {
-      @media (hover: hover) {
-        border-style: var(--tw-border-style);
-        border-width: 4px;
-      }
-    }
-  }
-  .hover\:border-5 {
-    &:hover {
-      @media (hover: hover) {
-        border-style: var(--tw-border-style);
-        border-width: 5px;
-      }
-    }
-  }
   .hover\:border-7 {
     &:hover {
       @media (hover: hover) {
         border-style: var(--tw-border-style);
         border-width: 7px;
-      }
-    }
-  }
-  .hover\:border-blue-400 {
-    &:hover {
-      @media (hover: hover) {
-        border-color: var(--color-blue-400);
       }
     }
   }
@@ -1090,11 +1023,6 @@
   inherits: false;
   initial-value: 0 0 #0000;
 }
-@property --tw-outline-style {
-  syntax: "*";
-  inherits: false;
-  initial-value: solid;
-}
 @property --tw-blur {
   syntax: "*";
   inherits: false;
@@ -1178,7 +1106,6 @@
       --tw-ring-offset-width: 0px;
       --tw-ring-offset-color: #fff;
       --tw-ring-offset-shadow: 0 0 #0000;
-      --tw-outline-style: solid;
       --tw-blur: initial;
       --tw-brightness: initial;
       --tw-contrast: initial;
