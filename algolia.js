@@ -30,7 +30,7 @@ autocomplete({
                 templates: {
                     item({ item, components, html }) {
                         return html`<a
-                            href="/pokemon/${item.name}"
+                            href="/pokemon/index.html?name=${item.name}"
                             class="h-auto p-4 rounded-xl shadow-md bg-white border border-gray-200 flex flex-row place-content-center items-center gap-2"
                         >
                             <div class="h-full">

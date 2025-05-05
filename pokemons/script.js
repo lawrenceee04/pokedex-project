@@ -46,14 +46,10 @@ async function getPokemons(page = 1) {
     if (cache.get(key)) {
         return cache.get(key);
     } else {
-        try {
-            const response = await fetchAPI('pokemon', offset, limit);
-            const results = response.results;
-            cache.set(key, results, 0);
-            return results;
-        } catch (error) {
-            return 1;
-        }
+        const response = await fetchAPI('pokemon', offset, limit);
+        const results = response.results;
+        cache.set(key, results, 0);
+        return results;
     }
 }
 
@@ -85,7 +81,7 @@ async function renderPokemon(page) {
                 const pokemon_card = document.createElement('a');
                 const a = document.createAttribute('class');
                 const pokemon_link = document.createAttribute('href');
-                pokemon_link.value = `/pokemon/${pokemon.name}`;
+                pokemon_link.value = `/pokemon/index.html?name=${pokemon.name}`;
                 pokemon_card.setAttributeNode(pokemon_link);
                 a.value = `w-36 lg:w-72 h-48 lg:h-72 p-5 rounded-2xl inline-flex flex-col justify-center items-center hover:rotate-y-180 transform-3d transition-transform duration-350 border border-2 hover:border-7 border-black`;
 
@@ -117,7 +113,7 @@ async function renderPokemon(page) {
                 pokemon_sprite.setAttributeNode(c);
                 const d = document.createAttribute('id');
                 d.value = `pokemon-${pokemon.id}-sprite`;
-                pokemon_sprite.setAttributeNode(c);
+                pokemon_sprite.setAttributeNode(d);
                 pokemon_sprite.src = `${pokemon.spriteUrl}`;
 
                 // Pokemon Name

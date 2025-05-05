@@ -49,6 +49,10 @@ export async function fetchAPI(endpoint, offset = 0, limit = 0) {
 
 export async function fetchSearchAPI(endpoint, id) {
     var target = document.querySelector('.spinner');
+    if (!target) {
+        console.error('Error no spinner classname on body');
+        return null;
+    }
     var spinner = new Spinner(opts).spin(target);
     target.classList.add('bg-black/80', 'z-999');
 
