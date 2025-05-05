@@ -76,6 +76,7 @@ async function renderPokemonDetails() {
     console.log(response);
 
     const body = document.querySelector('.spinner');
+    const lastNaItoPromise = document.getElementById('lastNaItoPromise');
     const pokemonContainer = document.getElementById('pokemon');
 
     body.style.background = typeGradients[response.types[0].type.name];
@@ -93,7 +94,10 @@ async function renderPokemonDetails() {
 
     // Stats Container
     const name_stats = document.createElement('div');
-    name_stats.classList.add('flex', 'flex-col', 'gap-4');
+    name_stats.classList.add('flex', 'flex-col', 'gap-4', 'items-center', 'lg:items-start');
+
+    const statsCollection = document.createElement('div');
+    statsCollection.classList.add('flex', 'flex-wrap', 'gap-10');
 
     // Pokemon Name
     const pokemonName = document.createElement('div');
@@ -101,33 +105,49 @@ async function renderPokemonDetails() {
     pokemonName.classList.add(`text-4xl`);
     pokemonName.innerHTML = `${response.name}`;
 
-    // Pokemon Stats
-    const pokemonStats = document.createElement('div');
-    pokemonStats.id = `${pokemon}-stats`;
-    pokemonStats.classList.add('w-50');
-
     const pokemonHp = createPokemonStatElement(response, 'hp', response.stats[0].base_stat);
-    const pokemonAtk = createPokemonStatElement(response, 'attack', response.stats[1].base_stat);
+    const pokemonAtk = createPokemonStatElement(response, 'atk', response.stats[1].base_stat, 200);
+    const pokemonDef = createPokemonStatElement(response, 'def', response.stats[2].base_stat, 230);
+    const pokemonSpAtk = createPokemonStatElement(response, 'sp atk', response.stats[3].base_stat, 200);
+    const pokemonSpDef = createPokemonStatElement(response, 'sp def', response.stats[4].base_stat, 230);
+    const pokemonSpeed = createPokemonStatElement(response, 'speed', response.stats[5].base_stat, 200);
+
+    // Create a responsive container
+    const responsiveContainer = document.createElement('div');
+    responsiveContainer.classList.add('max-w-screen-xl', 'text-center', 'p-4', 'lg:text-left');
+
+    // Add some text content
+    const responsiveText = document.createElement('p');
+    responsiveText.classList.add('text-base', 'lg:text-lg', 'font-medium');
+    responsiveText.innerText = `${response.name}`;
 
     // Append Those Children :) HAHAHAHA
 
     pokemonContainer.appendChild(pokemonSprite);
     name_stats.appendChild(pokemonName);
-    name_stats.appendChild(pokemonHp);
-    name_stats.appendChild(pokemonAtk);
+    name_stats.appendChild(statsCollection);
+    statsCollection.appendChild(pokemonHp);
+    statsCollection.appendChild(pokemonAtk);
+    statsCollection.appendChild(pokemonDef);
+    statsCollection.appendChild(pokemonSpAtk);
+    statsCollection.appendChild(pokemonSpDef);
+    statsCollection.appendChild(pokemonSpeed);
     pokemonContainer.appendChild(name_stats);
+
+    // responsiveContainer.appendChild(responsiveText);
+    // lastNaItoPromise.appendChild(responsiveContainer);
 }
 
-function createPokemonStatElement(response, statName, baseStat) {
+function createPokemonStatElement(response, statName, baseStat, maxStat = 255) {
     // Stat Container
     const pokemonStat = document.createElement('div');
     pokemonStat.id = `${response.name}-stats-${statName}`;
-    pokemonStat.classList.add('w-50', 'flex', 'flex-col', 'flex-cols-2', 'sm:flex-cols-3');
+    pokemonStat.classList.add('flex', 'flex-col', 'items-center', 'basis-1/3');
 
     // Stat - Name Only
     const pokemonStatName = document.createElement('div');
     pokemonStatName.id = `${response.name}-${statName}`;
-    pokemonStatName.classList.add('text-md');
+    pokemonStatName.classList.add('text-2xl');
     pokemonStatName.innerHTML = `${statName.toUpperCase()}`;
 
     pokemonStat.appendChild(pokemonStatName);
@@ -139,13 +159,13 @@ function createPokemonStatElement(response, statName, baseStat) {
     pokemonStatRadial.style.filter = 'drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5))'; // Add subtle dark drop shadow
     pokemonStat.appendChild(pokemonStatRadial);
 
-    const statInPercentage = baseStat / 255;
-    pokemonStatRadial.appendChild(renderCircularBar(statInPercentage, response.types[0].type.name));
+    const statInPercentage = baseStat / maxStat;
+    pokemonStatRadial.appendChild(renderCircularBar(statInPercentage, response.types[0].type.name, maxStat));
 
     return pokemonStat;
 }
 
-function renderCircularBar(data, type) {
+function renderCircularBar(data, type, maxStat) {
     const width = 10;
     const height = 10;
     const outerRadius = height * 0.5;
@@ -171,9 +191,9 @@ function renderCircularBar(data, type) {
     k.append('text')
         .attr('text-anchor', 'middle')
         .attr('dy', '0.35em')
-        .style('font-size', '2px')
+        .style('font-size', '3px')
         .style('fill', typeTextColors[type])
-        .text(Math.round(data * 255));
+        .text(Math.round(data * maxStat));
 
     return svg.node();
 }
