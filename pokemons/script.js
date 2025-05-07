@@ -83,7 +83,7 @@ async function renderPokemon(page) {
                 const pokemon_link = document.createAttribute('href');
                 pokemon_link.value = `/pokemon/index.html?name=${pokemon.name}`;
                 pokemon_card.setAttributeNode(pokemon_link);
-                a.value = `w-36 lg:w-72 h-48 lg:h-72 p-5 rounded-2xl inline-flex flex-col justify-center items-center hover:rotate-y-180 transform-3d transition-transform duration-350 border border-2 hover:border-7 border-black`;
+                a.value = `w-36 lg:w-72 h-48 lg:h-72 p-5 rounded-2xl inline-flex flex-col justify-center items-center hover:scale-110 transform-3d transition-transform duration-350 border border-2 hover:border-7 border-black`;
 
                 // Add hover effect dynamically
                 pokemon_card.addEventListener('mouseover', () => {
@@ -139,7 +139,7 @@ async function renderPokemon(page) {
                 pokemon.types.forEach((typeObj, index) => {
                     const pokemon_type = document.createElement('div');
                     const a = document.createAttribute('class');
-                    a.value = `px-1 py-0 rounded-lg flex justify-between items-center text-black text-xs lg:text-sm font-semibold`;
+                    a.value = `px-1 py-0 rounded-md flex justify-between items-center text-black text-xs lg:text-sm font-bold font-open-sans`;
                     pokemon_type.style.backgroundColor = typeColors[typeObj.type.name];
                     pokemon_type.setAttributeNode(a);
                     const b = document.createAttribute('id');
@@ -207,7 +207,7 @@ async function renderPokemon(page) {
                 // Append the details container to the desired parent element
                 back_card.appendChild(detailsContainer);
 
-                pokemon_card.appendChild(back_card);
+                // pokemon_card.appendChild(back_card);
                 pokemons.appendChild(pokemon_card);
             });
         }
