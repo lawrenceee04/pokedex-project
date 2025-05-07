@@ -6,9 +6,11 @@
         <title>Items</title>
         <link rel="stylesheet" href="/style.css" />
         <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
+        <link rel="stylesheet" href="../node_modules/spin.js/spin.css" />
         <script type="module" src="script.js"></script>
+        <script type="module" src="algolia.js" defer></script>
     </head>
-    <body>
+    <body class="spinner">
         <nav class="shadow-2xl">
             <div class="max-w-screen-xl flex flex-wrap lg:flex-nowrap items-center justify-between mx-auto p-4">
                 <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
@@ -63,6 +65,34 @@
                 </div>
             </div>
         </nav>
+
+        <!-- Search Section -->
+        <div class="swiper w-full h-40 sm:h-70 flex-col justify-center items-center">
+            <div class="w-full h-full bg-black flex flex-col items-center justify-center">
+                <div class="relative text-white">
+                    <div id="autocomplete"></div>
+                    <a
+                        href="https://www.algolia.com/"
+                        target="_blank"
+                        class="absolute right-1 my-3 font-roboto text-xs font-semibold flex gap-2">
+                        Search by
+                        <img class="h-4" src="/Algolia-logo-white.svg" alt="" />
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Items -->
+        <div
+            class="self-stretch px-2.5 py-6 inline-flex justify-center items-start gap-5 flex-wrap content-start overflow-hidden"
+            id="items-list"></div>
+        <div
+            class="pagination-container sticky bottom-0 flex place-content-center gap-3 py-4 bg-black text-white"
+            id="pagination">
+            <button class="pagination-btn p-2 rounded-lg hover:bg-amber-400" id="prev-page">Prev</button>
+            <span class="bg-red-500 p-2 rounded-lg" id="current-page">1</span>
+            <button class="pagination-btn p-2 rounded-lg hover:bg-amber-400" id="next-page">Next</button>
+        </div>
 
         <footer class="self-stretch px-4 py-5 flex flex-col justify-between items-center gap-6">
             <div class="self-stretch flex flex-col justify-center items-start gap-1.5">
