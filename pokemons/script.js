@@ -66,7 +66,7 @@ async function renderPokemon(page) {
                 result.map(async (element) => {
                     const pokemon = await getPokemonByUrl(element.url);
                     const id = pokemon.id;
-                    const spriteUrl = pokemon.sprites.front_default;
+                    const spriteUrl = pokemon.sprites.other['official-artwork'].front_default;
                     const types = pokemon.types;
                     const name = element.name;
                     const weight = pokemon.weight;
@@ -83,7 +83,7 @@ async function renderPokemon(page) {
                 const pokemon_link = document.createAttribute('href');
                 pokemon_link.value = `/pokemon/index.html?name=${pokemon.name}`;
                 pokemon_card.setAttributeNode(pokemon_link);
-                a.value = `w-36 lg:w-72 h-48 lg:h-72 p-5 rounded-2xl inline-flex flex-col justify-center items-center hover:scale-110 transform-3d transition-transform duration-350 border border-2 hover:border-7 border-black`;
+                a.value = `w-36 lg:w-72 h-48 lg:h-90 p-5 rounded-2xl inline-flex flex-col justify-center items-center hover:scale-110 transform-3d transition-transform duration-350 border border-2 hover:border-7 border-black`;
 
                 // Add hover effect dynamically
                 pokemon_card.addEventListener('mouseover', () => {

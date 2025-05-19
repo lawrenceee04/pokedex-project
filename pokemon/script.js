@@ -90,14 +90,14 @@ async function renderPokemonDetails() {
     const pokemonSprite = document.createElement('img');
     pokemonSprite.id = `${pokemon}-sprite`;
     pokemonSprite.classList.add('w-64', 'lg:w-128');
-    pokemonSprite.src = `${response.sprites.front_default}`;
+    pokemonSprite.src = `${response.sprites.other['official-artwork'].front_default}`;
 
     // Stats Container
     const name_stats = document.createElement('div');
     name_stats.classList.add('flex', 'flex-col', 'gap-4', 'items-center', 'lg:items-start');
 
     const statsCollection = document.createElement('div');
-    statsCollection.classList.add('flex', 'flex-wrap', 'gap-10');
+    statsCollection.classList.add('flex', 'flex-wrap', 'gap-4');
 
     // Pokemon Name
     const pokemonName = document.createElement('div');
@@ -117,8 +117,8 @@ async function renderPokemonDetails() {
     responsiveContainer.classList.add('max-w-screen-xl', 'text-center', 'p-4', 'lg:text-left');
 
     // Add some text content
-    const responsiveText = document.createElement('p');
-    responsiveText.classList.add('text-base', 'lg:text-lg', 'font-medium');
+    const responsiveText = document.createElement('div');
+    responsiveText.classList.add('text-xl', 'lg:text-3xl', 'font-medium');
     responsiveText.innerText = `${response.name}`;
 
     // Append Those Children :) HAHAHAHA
@@ -134,8 +134,8 @@ async function renderPokemonDetails() {
     statsCollection.appendChild(pokemonSpeed);
     pokemonContainer.appendChild(name_stats);
 
-    // responsiveContainer.appendChild(responsiveText);
-    // lastNaItoPromise.appendChild(responsiveContainer);
+    responsiveContainer.appendChild(responsiveText);
+    lastNaItoPromise.appendChild(responsiveContainer);
 }
 
 function createPokemonStatElement(response, statName, baseStat, maxStat = 255) {
