@@ -73,7 +73,6 @@ document.title = `Pokemon | ${pokemon}`;
 
 async function renderPokemonDetails() {
     const response = await fetchSearchAPI('pokemon', `${pokemon}`);
-    console.log(response);
 
     const body = document.querySelector('.spinner');
     const lastNaItoPromise = document.getElementById('lastNaItoPromise');
