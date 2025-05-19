@@ -33,9 +33,9 @@ autocomplete({
                             href="/pokemon/index.html?name=${item.name}"
                             class="h-auto p-4 rounded-xl shadow-md bg-white border border-gray-200 flex flex-row place-content-center items-center gap-2"
                         >
-                            <div class="h-full">
+                            <div class="w-30 lg:w-60">
                                 <img
-                                    src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${item.id}.png"
+                                    src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${item.id}.png"
                                     alt="${item.name}"
                                     id="pokemon-${item.id}-img"
                                 />
