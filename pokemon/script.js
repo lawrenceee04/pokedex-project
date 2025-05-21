@@ -118,10 +118,9 @@ async function renderPokemonDetails() {
     // Add some text content
     const responsiveText = document.createElement('div');
     responsiveText.classList.add('text-xl', 'lg:text-3xl', 'font-medium');
-    responsiveText.innerText = `${response.name}`;
+    responsiveText.innerText = `${response.name.toUpperCase()} EVOLUTION CHAIN`;
 
     // Append Those Children :) HAHAHAHA
-
     pokemonContainer.appendChild(pokemonSprite);
     name_stats.appendChild(pokemonName);
     name_stats.appendChild(statsCollection);
@@ -132,7 +131,10 @@ async function renderPokemonDetails() {
     statsCollection.appendChild(pokemonSpDef);
     statsCollection.appendChild(pokemonSpeed);
     pokemonContainer.appendChild(name_stats);
+    lastNaItoPromise.appendChild(responsiveText);
 
+    // Render evolution chain inside lastNaItoPromise (below everything else)
+    await renderEvolutionChain(response.name, lastNaItoPromise);
     // responsiveContainer.appendChild(responsiveText);
     // lastNaItoPromise.appendChild(responsiveContainer);
 }
@@ -195,6 +197,97 @@ function renderCircularBar(data, type, maxStat) {
         .text(Math.round(data * maxStat));
 
     return svg.node();
+}
+
+async function fetchEvolutionChain(pokemonName) {
+    // 1. Fetch species data
+    const speciesRes = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemonName}`);
+    const speciesData = await speciesRes.json();
+    // 2. Fetch evolution chain
+    const evoChainRes = await fetch(speciesData.evolution_chain.url);
+    const evoChainData = await evoChainRes.json();
+    // 3. Parse evolution chain
+    const chain = [];
+    let evoData = evoChainData.chain;
+    do {
+        chain.push(evoData.species.name);
+        evoData = evoData.evolves_to[0];
+    } while (evoData && evoData.hasOwnProperty('evolves_to'));
+    return chain;
+}
+
+async function renderEvolutionChain(pokemonName, container) {
+    const chain = await fetchEvolutionChain(pokemonName);
+    const evoDiv = document.createElement('div');
+    evoDiv.classList.add('flex', 'items-center', 'gap-2', 'my-6', 'w-full', 'flex-wrap', 'justify-center');
+    for (let i = 0; i < chain.length; i++) {
+        const name = chain[i];
+        // Sprite + name wrapper
+        const spriteWrapper = document.createElement('div');
+        spriteWrapper.classList.add(
+            'flex',
+            'flex-col',
+            'items-center',
+            'cursor-pointer',
+            'hover:scale-105',
+            'transition-transform',
+            'duration-200',
+            'p-4', // Add larger padding
+            'md:p-6', // Even larger on medium screens
+            'xl:p-8' // Even larger on extra large screens
+        );
+        spriteWrapper.onclick = () => {
+            window.location.href = `index.html?pokemon=${name}`;
+        };
+        // Sprite
+        const img = document.createElement('img');
+        img.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${await getPokemonId(
+            name
+        )}.png`;
+        img.alt = name;
+        img.classList.add(
+            'object-contain',
+            'transition-all',
+            'duration-300',
+            'h-28',
+            'w-28',
+            'sm:h-36',
+            'sm:w-36',
+            'md:h-44',
+            'md:w-44',
+            'lg:h-56',
+            'lg:w-56',
+            'xl:h-64',
+            'xl:w-64'
+        );
+        spriteWrapper.appendChild(img);
+        // Name
+        const label = document.createElement('div');
+        label.innerText = name.charAt(0).toUpperCase() + name.slice(1);
+        label.classList.add('text-xs', 'md:text-base', 'lg:text-lg', 'font-semibold', 'text-center', 'mt-2');
+        spriteWrapper.appendChild(label);
+        evoDiv.appendChild(spriteWrapper);
+        // Arrow (except last)
+        if (i < chain.length - 1) {
+            const arrow = document.createElement('span');
+            arrow.innerText = '→';
+            arrow.classList.add('mx-4', 'text-5xl', 'font-extrabold', 'leading-none');
+            evoDiv.appendChild(arrow);
+        }
+        // Highlight the current pokemon
+        if (name === pokemonName.toLowerCase()) {
+            spriteWrapper.style.boxShadow = '0 0 32px 8px rgba(0,0,0,0.35)'; // Add a subtle shadow highlight
+            spriteWrapper.style.borderRadius = '2rem';
+        }
+    }
+    container.appendChild(evoDiv);
+}
+
+async function getPokemonId(name) {
+    // Fetch basic data to get the ID
+    const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
+    const data = await res.json();
+    return data.id;
 }
 
 renderPokemonDetails();
