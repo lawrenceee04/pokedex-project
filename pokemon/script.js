@@ -133,8 +133,8 @@ async function renderPokemonDetails() {
     statsCollection.appendChild(pokemonSpeed);
     pokemonContainer.appendChild(name_stats);
 
-    responsiveContainer.appendChild(responsiveText);
-    lastNaItoPromise.appendChild(responsiveContainer);
+    // responsiveContainer.appendChild(responsiveText);
+    // lastNaItoPromise.appendChild(responsiveContainer);
 }
 
 function createPokemonStatElement(response, statName, baseStat, maxStat = 255) {

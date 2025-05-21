@@ -12,6 +12,7 @@ export default defineConfig({
                 pokemon: resolve(__dirname, 'pokemon/index.html'),
                 pokemons: resolve(__dirname, 'pokemons/index.html'),
                 items: resolve(__dirname, 'items/index.html'),
+                item: resolve(__dirname, 'item/index.html'),
             },
         },
     },
